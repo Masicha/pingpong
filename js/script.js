@@ -1,13 +1,35 @@
-jQuery(document).ready(function() {
-  jQuery("h1").click(function() {
-    alert("This is a header.");
-  });
+//business-logic-interface
+function pingPong(userInput){
+  var result = [];
 
-  jQuery("p").click(function() {
-    alert("This is a paragraph.");
-  });
+  for (var index = 1; index <= userInput; index++){
+    if ((index % 15) === 0){
+      result.push ("Ping-Pong");
+    } else if ((index % 5) === 0){
+      result.push ("Pong");
+    } else if ((index % 3) === 0){
+      result.push ("Ping");
+    } else
+    result.push (index);
+  }
+  return result;
 
-  jQuery("img").click(function() {
-    alert("This is an image.");
+}
+
+
+
+
+
+
+//user-interface
+$(document).ready(function() {
+  $("form#pingPong").submit(function(event) {
+    $("#userOutput").empty();
+    var userInput = parseInt($("input#number").val());
+    var result = pingPong(userInput);
+    result.forEach(function(output) {
+    $("#userOutput").append("<li>" + output + "</li>");
+    event.preventDefault();
   });
+});
 });
